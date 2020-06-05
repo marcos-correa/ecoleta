@@ -25,7 +25,7 @@ nunjucks.configure("src/views", {
 
 //rota pagina inicial
 server.get("/", (req, res) => {
-    return res.render("index.html") //render |antes era sendFile(__dirname + "/vies/index.html")
+    return res.render("index.html") //render |antes era sendFile(__dirname + "/views/index.html")
 })
 
 //rota para a create-point

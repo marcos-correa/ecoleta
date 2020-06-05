@@ -2,6 +2,36 @@
     --title-color: #322153;
     --primary-color: #34cb79;
 }
+/* placeholders */
+    ::-webkit-input-placeholder  { 
+        font-weight: 500;
+        transition: 200ms;
+        color: #adadad; 
+    }
+    input:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    /*  */
+    input:-moz-placeholder {
+        font-weight: 500;
+        transition: 200ms;
+        color: #adadad; 
+    }
+    textarea:-moz-placeholder {
+        font-weight: 500;
+        transition: 200ms;
+        color: #e2e2e2; 
+    }​ 
+    input:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    input:focus::-moz-placeholder {
+        color: transparent; 
+    }
+    textarea:focus::-moz-placeholder {
+        color: transparent; 
+    }​
+/* endplaceholders */
 * {
     margin: 0;
     padding: 0;
