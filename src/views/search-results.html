@@ -15,37 +15,81 @@
     {% include "partials/page-header.html" %}
 
     <main>
+    {% if total > 0 %}
+
         <h4>
-            <strong>2 pontos</strong>
+            <strong>{{ total }} pontos</strong>
             encontrados
         </h4>
 
         <div class="cards">
-            <div class="card">
-                <img src="/images/collectoria.jpg" alt="Collectoria">
-                <h1>Collectoria</h1>
-                <h3>Resíduos Eletrônicos, Lâmpadas</h3>
+            {# repetição do NJ para os cada um das linhas no BD #}
+            {% for place in places %}
+             <div class="card">
+                <img src="{{ place.image }}" alt="{{ place.name }}">
+                <h1>{{ place.name }}</h1>
+                    
+                    {# {%for place.item in places.items %}
+                        <h1>Estou aqui</h1>
+                    {% endfor %} 
+                    
+                    
+                    <div class="mini-items-grid">
+
+                        <li data-id="Lâmpadas">
+                            <img src="/assets/lampadas.svg" alt="Lâmpadas">
+                            <span>Lâmpadas</span>
+                        </li>
+
+                        <li data-id="Pilhas e Baterias">
+                            <img src="/assets/baterias.svg" alt="Pilhas e Baterias">
+                            <span>Pilhas e Baterias</span>
+                        </li>
+
+                        <li data-id="Papéis e papelão">
+                            <img src="/assets/papeis-papelao.svg" alt="Papéis e papelão">
+                            <span>Papéis e papelão</span>
+                        </li>
+
+                        <li data-id="Resíduos Eletrônicos">
+                            <img src="/assets/eletronicos.svg" alt="Resíduos Eletrônicos">
+                            <span>Resíduos Eletrônicos</span>
+                        </li>
+
+                        <li data-id="Resíduos Orgânicos">
+                            <img src="/assets/organicos.svg" alt="Resíduos Orgânicos">
+                            <span>Resíduos Orgânicos</span>
+                        </li>
+                        <li data-id="Óleo de cozinha">
+                            <img src="/assets/oleo.svg" alt="Óleo de cozinha"><span>Óleo de cozinha</span>
+                        </li>
+
+                    </div>
+
+                    #}
+                
+                <h3>{{ place.items }}</h3>
                 <p>
-                    Rio do Sul, Santa Catanrina
+                    {{ place.city }}, {{ place.state }}
                     <br/>
-                    Guilherme Gemballa, Jardim América
+                    {{ place.address }}
                     <br/>
-                    Nº 260
+                    {{ place.address2 }}
                 </p>
             </div>
-            <div class="card">
-                <img src="/images/paperside.jpg" alt="Papersider">
-                <h1>Paperside</h1>
-                <h3>Papéis e papelão</h3>
-                <p>
-                    Rio do Sul, Santa Catanrina
-                    <br/>
-                    Guilherme Gemballa, Jardim América
-                    <br/>
-                    Nº 260
-                </p>
-            </div>
+            {# tem que fazer um FOR item IN items #}
+            {% endfor %}
+
+
         </div>
+
+    {% else %}
+    {# TAREFA - sobrescrever essa parte em um modal 404 #}
+    <h4><strong>Nenhum</strong> ponto de coleta encontrado. </br></br>Tente buscar por uma cidade mais próxima ;)</h4>
+
+    {% endif %}
+
+
 
     </main>
 

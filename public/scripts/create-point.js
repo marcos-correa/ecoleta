@@ -131,7 +131,7 @@ function handleSelectedItem(event){
         // })
     //Função utilizada
     const alreadySelected = selectedItems.findIndex( item => {
-        const itemFound = item == itemId //isso serátrue ou false
+        const itemFound = item == itemId //isso será true ou false
         return itemFound
     })
 
@@ -150,11 +150,13 @@ function handleSelectedItem(event){
             return itemIsDifferent //removido do array | entra nos itens filtrados
         })
         selectedItems = filteredItems
+        // console.log("Item TIRADO")
         // console.log(filteredItems)
     } else{
         // se não estiver selecionado, 
         //adicionar à seleção
         selectedItems.push(itemId)
+        console.log(itemId)
     }
     
     // console.log(selectedItems) //verificando se rolou 1 e 2

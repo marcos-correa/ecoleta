@@ -49,7 +49,7 @@
         grid-template-columns: 1fr 1fr;
     }
     #page-create-point .items-grid li{
-        height: 100%;
+        height: 100px;
         padding: 16px 12px 8px;
     }
     #page-create-point .items-grid li img{

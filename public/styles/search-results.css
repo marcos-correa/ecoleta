@@ -1,8 +1,14 @@
+body{
+    background: white;
+    -webkit-font-smoothing: antialiasied;
+}
+
 body::after{
     content: "";
     position: absolute;
-    background: white;
-    top: 260px;
+    background: #f0f0f5;
+    top: 0;
+    height: 18rem;
     right: 0;
     left: 0;
     bottom: 0;
@@ -104,4 +110,53 @@ main .card p {
     color: #6c6c80
 }
 
+/* itens mini */
+.mini-items-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    padding: 0.6rem;
+}
+
+.mini-items-grid li {
+    background-color: #e1faec;
+    list-style: none;
+
+    height: 75px;
+    width: 75px;
+
+    border: 1px solid #34cb79;
+    border-radius: 6px;
+    padding: 10px 8px 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.mini-items-grid li span{
+    margin-top: 4px;
+    font-size: 12px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    color: var(--title-color);
+    pointer-events: none;
+}
+
+
+/* o evento de pointer (click, no caso) dentro de li e span,
+imagem e texto, somento no pai, li... top */
+.mini-items-grid li img {
+        size: inherit;
+        height: 40px;
+        filter: grayscale(0);
+        width: 40px;
+        pointer-events: none;
+}
 
