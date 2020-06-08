@@ -72,21 +72,32 @@ document
 // pegar todos os li de uma vez
 // ouvidor de evento
 
-//objeto documento, selecionar todos os lis encontrados - tudo em uma variavel
+//objeto documento, selecionar todos os lis encontrados - tudo em uma variavel DO TIPO ARRAY?
 const itemsToCollect = document.querySelectorAll(".items-grid li")
 
-//for - estrutura de repetição
-//para cada (const) item (li) de itemsToCollect (que acima é selecionado todos os li do items-grid)
-for (const item of itemsToCollect) {//evento adicionado / evento: click / + função handle (por referencia)
-    item.addEventListener("click", handleSelectedItem)
+for (const item of itemsToCollect) {//Função para cada item LI dos 6 items, ouve o evento clique e chama a função de controle do item selecionado
+    item.addEventListener("click", handleSelectedItem) //handle: controlar // pra cada item
 }
 
-// olhar final do código, passo 3)
-const collectedItems = document.querySelector("input[name=items")
+
+const collectedItems = document.querySelector("input[name=items") //Constante ITENS COLETADOS
+
+const collectedItem1 = document.querySelector("input[name=item1")
+const collectedItem2 = document.querySelector("input[name=item2")
+const collectedItem3 = document.querySelector("input[name=item3")
+const collectedItem4 = document.querySelector("input[name=item4")
+const collectedItem5 = document.querySelector("input[name=item5")
+const collectedItem6 = document.querySelector("input[name=item6")
+const collectedItemTotal = document.querySelector("input[name=itemTotal")
+
 
 // criando uma variável para os inputs | ler comentário IMPORTANTE de handleSelected
 // será um array, uma coleção de dados
 let selectedItems = [] // os elementos selecionados aqui ficam com o IndexID 0 a 5
+
+let intemId1 = []
+
+let selectedItemsName = []
 
 //criando a função // ouvindo o evento
 //toda a vez que o evento é disparado (acima, no 'addEvent' - click), ele entra dentro da função referenciada
@@ -107,6 +118,7 @@ function handleSelectedItem(event){
     const itemLi = event.target
     //colocando cada id de CADA ITEM em uma variável
     const itemId = itemLi.dataset.id
+    console.log(itemId)
     //adicionar uma classe a li quando clicar, e remover quando existir
     //classList = add ou remove ou toggle (esse adiciona qdo n tem e remove qdo tem).
     itemLi.classList.toggle("selected")
@@ -133,8 +145,8 @@ function handleSelectedItem(event){
     const alreadySelected = selectedItems.findIndex( item => {
         const itemFound = item == itemId //isso será true ou false
         return itemFound
+        // console.log(itemFound)
     })
-
     //  --Função simplificada:
         //  const alreadySelected = selectedItems.findIndex( item => item == itemId)
       
@@ -148,24 +160,33 @@ function handleSelectedItem(event){
         const filteredItems = selectedItems.filter( item => {
             const itemIsDifferent = item != itemId //quando é desselecionado
             return itemIsDifferent //removido do array | entra nos itens filtrados
+            // console.log(itemIsDifferent)
         })
         selectedItems = filteredItems
+        // console.log(filteredItems)
         // console.log("Item TIRADO")
         // console.log(filteredItems)
     } else{
         // se não estiver selecionado, 
         //adicionar à seleção
         selectedItems.push(itemId)
-        console.log(itemId)
+        // console.log(itemId)
     }
     
     // console.log(selectedItems) //verificando se rolou 1 e 2
     
     
     // atualizar o campo escondido (input) com os itens selecionados
-    //document.querySelector("input[name=items")  deixei numa variável acima
+    //document.querySelector("input[name=items]")  deixei numa variável acima
     collectedItems.value = selectedItems
+    collectedItem1.value = selectedItems[0]
+    collectedItem2.value = selectedItems[1]
+    collectedItem3.value = selectedItems[2]
+    collectedItem4.value = selectedItems[3]
+    collectedItem5.value = selectedItems[4]
+    collectedItem6.value = selectedItems[5]
+    collectedItemTotal.value = selectedItems.length
+    // console.log (selectedItems)
+    const itemTotal = (selectedItems.length)
+    
 }
-
-
-

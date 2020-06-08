@@ -23,59 +23,50 @@
         </h4>
 
         <div class="cards">
-            {# repetição do NJ para os cada um das linhas no BD #}
+            {# repetição do NJ para os cada um das linahas no BD #}
             {% for place in places %}
              <div class="card">
                 <img src="{{ place.image }}" alt="{{ place.name }}">
                 <h1>{{ place.name }}</h1>
+                                        
+                    {# {% set food = {
+                         place.name : '5 tbsp',
+                         'mustard': '1 tbsp',
+                        'pickle': '0 tbsp'} %}
+                        {% for fruit, color in food %}
+                        <div>Did you know that {{ fruit }} is {{ color }}?</div>
+                        {% endfor %} #}
                     
-                    {# {%for place.item in places.items %}
-                        <h1>Estou aqui</h1>
-                    {% endfor %} 
-                    
-                    
-                    <div class="mini-items-grid">
-
-                        <li data-id="Lâmpadas">
-                            <img src="/assets/lampadas.svg" alt="Lâmpadas">
-                            <span>Lâmpadas</span>
-                        </li>
-
-                        <li data-id="Pilhas e Baterias">
-                            <img src="/assets/baterias.svg" alt="Pilhas e Baterias">
-                            <span>Pilhas e Baterias</span>
-                        </li>
-
-                        <li data-id="Papéis e papelão">
-                            <img src="/assets/papeis-papelao.svg" alt="Papéis e papelão">
-                            <span>Papéis e papelão</span>
-                        </li>
-
-                        <li data-id="Resíduos Eletrônicos">
-                            <img src="/assets/eletronicos.svg" alt="Resíduos Eletrônicos">
-                            <span>Resíduos Eletrônicos</span>
-                        </li>
-
-                        <li data-id="Resíduos Orgânicos">
-                            <img src="/assets/organicos.svg" alt="Resíduos Orgânicos">
-                            <span>Resíduos Orgânicos</span>
-                        </li>
-                        <li data-id="Óleo de cozinha">
-                            <img src="/assets/oleo.svg" alt="Óleo de cozinha"><span>Óleo de cozinha</span>
-                        </li>
+                   <div class="mini-items-grid">                    
+   
+                        
+                        {% set names = ['id','Lâmpadas e Vidros','Pilhas e Baterias','Papéis e papelão','Resíduos Eletrônicos','Resíduos Orgânicos','Óleo de cozinha'] %}
+                        {% set imgs = ['id','/assets/lampadas.svg','/assets/baterias.svg','/assets/papeis-papelao.svg','/assets/eletronicos.svg','/assets/organicos.svg','/assets/oleo.svg'] %}
+                        
+                            {% set items = [place.item1, place.item2,place.item3,place.item4,place.item5,place.item6] %}
+                                {%for item in names and items %}
+                                <li id="{{item}}" class="{{item}}">
+                                    <img src="{{imgs[item]}}" alt="{{name}}">
+                                    <span>{{names[item]}}</span>
+                                </li>
+                            {%endfor%}
 
                     </div>
-
-                    #}
                 
-                <h3>{{ place.items }}</h3>
-                <p>
-                    {{ place.city }}, {{ place.state }}
-                    <br/>
-                    {{ place.address }}
-                    <br/>
-                    {{ place.address2 }}
-                </p>
+                {% set names = ['id','Lâmpadas e Vidros','Pilhas e Baterias','Papéis e papelão','Resíduos Eletrônicos','Resíduos Orgânicos','Óleo de cozinha'] %}
+                
+                {# <h3>{% for placeitem in place.items %}
+                    {{ names[placeitem] }}
+                    {% endfor%} 
+                </h3> #}
+                <div class="address">
+                    <img src="/assets/address2.svg">
+                    <p>
+                        {{ place.address }}, {{ place.address2 }} - 
+                        {{ place.city }} - {{ place.state}}
+                        
+                    </p>
+                </div>
             </div>
             {# tem que fazer um FOR item IN items #}
             {% endfor %}

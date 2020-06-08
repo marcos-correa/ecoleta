@@ -12,48 +12,47 @@ module.exports = db
 //função anonima dentro de ()
 db.serialize(() =>{
     // ----- COM COMANDOS SQL
-    //criar uma tabela
+    //criar uma tabela || primeira linha da tabela id INTEGER PRIMARY KEY AUTOINCREMENT,
+    db.run(`
+        CREATE TABLE IF NOT EXISTS places (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            image,
+            name,
+            address,
+            address2,
+            uf,
+            state,
+            uc,
+            city,
+            items,
+            item1,
+            item2,
+            item3,
+            item4,
+            item5,
+            item6,
+            itemTotal
+        );
+    `)
     // db.run(`
-    //     CREATE TABLE IF NOT EXISTS places (
+    //     CREATE TABLE IF NOT EXISTS items (
     //         id INTEGER PRIMARY KEY AUTOINCREMENT,
-    //         image TEXT,
-    //         name TEXT,
-    //         address TEXT,
-    //         address2 TEXT,
-    //         uf TEXT,
-    //         state TEXT,
-    //         uc TEXT,
-    //         city TEXT,
-    //         items TEXT
+    //         name,
+    //         itemid
     //     );
     // `)
     
-    
     // //começo de inserir dados na tabela
     // const query = `
-    //     INSERT INTO places(
-    //         image,
+    //     INSERT INTO items(
     //         name,
-    //         address,
-    //         address2,
-    //         uf,
-    //         state,
-    //         uc,
-    //         city,
-    //         items
-    //     ) VALUES(?,?,?,?,?,?,?,?,?)
+    //         itemid
+    //     ) VALUES(?,?)
     // `
 
     // const values = [
-    //     "http://127.0.0.1:3000/images/papersider.jpg",
-    //     "Papersider",
-    //     "Jardim Ameria",
-    //     "numero 237",
-    //     "21",
-    //     "Paraná",
-    //     "210002301",
-    //     "Rio do Sul",
-    //     "Outras coisas"
+    //     "Óleo de Cozinha",
+    //     "Óleo de Cozinha"
     // ]
     // //função callback(posição 3) | chame de volta | espera na loja de roupa qdo func vai no depósito 
     // function afterInsertData(err){
@@ -68,7 +67,7 @@ db.serialize(() =>{
     
     // // ----------------------INSERIR DADOS
     // db.run(query, values, afterInsertData)
-    // // ----------------------INSERIR DADOS
+    // ----------------------INSERIR DADOS
     
     
     // //consultar os dados da tabela
@@ -82,33 +81,50 @@ db.serialize(() =>{
     
     // // ------------------------ CONSULTAR DADOS
 
-    // // function consultRegs(err,rows){
-    // //     if(err){
-    // //         return console.log(err)
-    // //     }
-    // //  //     const total = rows.length
-    // //  //     console.log("Total de cadastros")
-    // //  //     console.log(total)
-    // //  //     console.log("cadastros")
-    // //  //     console.log(rows)
-        
+    function consultRegs(err,rows){
+        if(err){
+            return console.log(err)
+        }
+         const total = rows.length
+         console.log("Total de cadastros")
+         console.log(total)
+         console.log("cadastros")
+         console.log(rows)
+
+    //  //    return res.render("search-results.html", {places: rows, total})
+    }
+    // db.all(`SELECT * FROM items`, consultRegs)
+    db.all(`SELECT * FROM places`, consultRegs)
+    // db.all(`SELECT * FROM places`, consultRegs)
+
+    // ------ consultando itens
+
+    // function consultRegs(err,rows){
+    //     if(err){
+    //         return console.log(err)
+    //     }
+    //      const total = rows.length
+    //      console.log("Total de cadastros em ITEMS")
+    //      console.log(total)
+    //      console.log("cadastros")
+    //      console.log(rows)
+
+    // //    return res.render("search-results.html", {items: rows, total})
+    // }
+    // db.all(`SELECT * FROM items`, consultRegs)
 
 
-    // //    // return res.render("search-results.html", {places: rows, total})
-    // // }
-    // // db.all(`SELECT * FROM places`, consultRegs)
-    // // db.all(`SELECT * FROM places`, consultRegs)
-
-
-    // //deletar um dado da tabela
+    //deletar um dado da tabela
     // function deleteRegs(err){
     //     if(err){
     //         return console.log(err)
     //     }
-    //     // console.log("Registros deletados com sucesso")
-    //     // console.log(this)
+    //     console.log("Registros deletados com sucesso")
+    //     console.log(this)
     // }
-    // //------------------------------------------ DELETAR DADOS
-    // db.run(`DELETE FROM places WHERE id = ?`, [8], deleteRegs) // db.all(`SELECT * FROM places`, consultRegs) //CONSULTANDO DEPOIS DA DELEÇÃO
+    //------------------------------------------ DELETAR DADOS
+    // db.exec(`DROP TABLE IF EXISTS items;`, deleteRegs) // db.all(`SELECT * FROM places`, consultRegs) //CONSULTANDO DEPOIS DA DELEÇÃO
+    // db.run(`DELETE FROM places WHERE id = ?`, [8], deleteRegs) // 
+    //db.all(`SELECT * FROM places`, consultRegs) //CONSULTANDO DEPOIS DA DELEÇÃO
 
 })

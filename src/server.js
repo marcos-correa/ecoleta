@@ -1,16 +1,14 @@
 const express = require("express") //requisitando o express e salvando o retorno na variavel express
 const server = express() //executando o objeto express salvo anteriormente | objeto servidor
-
-//pegar o bando de dados
-const db = require("./database/db")
+const db = require("./database/db") //pegar o bando de dados
 
 
 //configurando pasta public pro layout achar
 //use = configuração especifica do servidor
-//static é uma função que epera um argumento
+//static é uma função que epera um argumento 
 server.use(express.static("public"))
 
-//habilitar o uso do req.boy para usar na app
+//habilitar o uso do req.body para usar na app
 server.use(express.urlencoded({extended: true}))
 
 //utilizando o template engine || html com superpoderes
@@ -40,7 +38,7 @@ server.get("/create-point", (req, res) => {
     // para fazer uma requisição, que por enquanto era só /createpoit, quando cadastra tem que vir um req. e esse req é o req.query
     // req.query: Query Strings da URL | os dados que ficam na URL qdo SUBMIT | console.log(req.query)
     // req.query
-    // console.log(req.query)
+    //console.log(req.query)
 
 
     return res.render("create-point.html")
@@ -61,8 +59,15 @@ server.post("/savepoint", (req, res) =>{
             state,
             uc,
             city,
-            items
-        ) VALUES(?,?,?,?,?,?,?,?,?)
+            items,
+            item1,
+            item2,
+            item3,
+            item4,
+            item5,
+            item6,
+            itemTotal
+        ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     `
 
     const values = [
@@ -74,7 +79,14 @@ server.post("/savepoint", (req, res) =>{
         req.body.state,
         req.body.city,
         req.body.currentCity,
-        req.body.items
+        req.body.items,
+        req.body.item1,
+        req.body.item2,
+        req.body.item3,
+        req.body.item4,
+        req.body.item5,
+        req.body.item6,
+        req.body.itemTotal
     ]
     //função callback(posição 3) | chame de volta | espera na loja de roupa qdo func vai no depósito 
     function afterInsertData(err){
@@ -87,7 +99,7 @@ server.post("/savepoint", (req, res) =>{
         console.log("Cadastrado com sucesso")
         console.log(this)
 
-        return res.render("/create-point.html", { saved: true})
+        return res.render("create-point.html", { saved: true})
 
     }
     
@@ -103,27 +115,25 @@ server.post("/savepoint", (req, res) =>{
 //rota para a search-results ;; JAVA
 server.get("/search-results", (req, res) => {
 
-    const search = req.query.search
+    const search = req.query.search //constante search é a requisição do user o "query.search"
 
-    if(search == ""){
-        //pesquisa vazia
-        return res.render("search-results.html", {total: 0})
-    }
-
-
-
+        if(search == ""){
+            return res.render("search-results.html", {total: 0}) //pesquisa vazia | o total:0 entra num if no /search-results pra apresentar o 404
+        }
     //pegar os dados do banco de dados -- INTEGRAÇÃO COM A FUNCTION DO BD!! TOOOOP
     function consultRegs(err,rows){
         if(err){
             return console.log(err)
         }
-        const total = rows.length
-        // console.log("Total de cadastros") // console.log(total) // console.log("cadastros") // console.log(rows)
+        const total = rows.length //lenght é tamanho | tamanho de linhas (as linhas são os cadastros)
+        //console.log("Total de cadastros") // console.log(total) // console.log("cadastros") // console.log(rows)
         return res.render("search-results.html", {places: rows, total})
     }
-    //
     //db.all(`SELECT * FROM places WHERE city = '${search}'`, consultRegs)
     db.all(`SELECT * FROM places WHERE city LIKE '%${search}%'`, consultRegs)
+    
+    // ESSA LINHA ABAIXO PESQUISA CADA UM DOS ITENS
+    //db.all(`SELECT * FROM items WHERE name LIKE '%${search}%'`, consultRegs)
 
     // TAREFA.... Deixar só o db.all aqui e chamar a função no BD | eu coloquei no return um , {places:rows} que é um nunjucks
 })
